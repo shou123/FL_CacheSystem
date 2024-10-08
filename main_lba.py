@@ -12,6 +12,7 @@ num_rounds = 10
 csv_file = 'first_200_rows.csv'  
 df = pd.read_csv(csv_file)
 
+df['orignal_lba'] = df['lba']
 # Preprocess the data (convert hex to int)
 df['ticks'] = df['ticks'].apply(lambda x: int(x, 16))
 df['lba'] = df['lba'].apply(lambda x: int(x, 16))
@@ -97,7 +98,7 @@ lba_predictions = model.predict(X_new)
 
 # Convert predicted lba values to hexadecimal
 lba_predictions_hex = [hex(int(pred)) for pred in lba_predictions]
-new_df['orignal_lba'] = df['lba']
+new_df['orignal_lba'] = df['orignal_lba']
 
 # Add predictions to the dataframe (hex values)
 new_df['predicted_lba'] = lba_predictions_hex
